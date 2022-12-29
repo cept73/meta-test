@@ -31,13 +31,12 @@ class Formula
             $currentCharacter = $this->formula[$index];
 
             $isOpenedBracketChar = ($openedBracketsList[$currentCharacter] ?? null) !== null;
-            $isClosedBracketChar = ($revertedClosedBracket = $closedBracketsList[$currentCharacter] ?? null) !== null;
-
             if ($isOpenedBracketChar) {
                 $currentOpenedBrackets .= $currentCharacter;
                 continue;
             }
 
+            $isClosedBracketChar = ($revertedClosedBracket = $closedBracketsList[$currentCharacter] ?? null) !== null;
             if ($isClosedBracketChar) {
                 if (empty($currentOpenedBrackets)) {
                     return false;
