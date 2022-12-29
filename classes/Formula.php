@@ -30,21 +30,24 @@ class Formula
         for ($index = 0; $index < $indexMax; $index ++) {
             $currentCharacter = $this->formula[$index];
 
-            switch (true) {
-                case ($openedBracketsList[$currentCharacter] ?? null) !== null:
-                    $currentOpenedBrackets .= $currentCharacter;
-                    break;
+            $isOpenedBracketChar = ($openedBracketsList[$currentCharacter] ?? null) !== null;
+            $isClosedBracketChar = ($revertedClosedBracket = $closedBracketsList[$currentCharacter] ?? null) !== null;
 
-                case ($revertedClosedBracket = $closedBracketsList[$currentCharacter] ?? null) !== null:
-                    if (empty($currentOpenedBrackets)) {
-                        return false;
-                    }
+            if ($isOpenedBracketChar) {
+                $currentOpenedBrackets .= $currentCharacter;
+                continue;
+            }
 
-                    $lastOpenedBracket = substr($currentOpenedBrackets, -1);
-                    $currentOpenedBrackets = substr($currentOpenedBrackets, 0, -1);
-                    if ($lastOpenedBracket !== $revertedClosedBracket) {
-                        return false;
-                    }
+            if ($isClosedBracketChar) {
+                if (empty($currentOpenedBrackets)) {
+                    return false;
+                }
+
+                $lastOpenedBracket = substr($currentOpenedBrackets, -1);
+                $currentOpenedBrackets = substr($currentOpenedBrackets, 0, -1);
+                if ($lastOpenedBracket !== $revertedClosedBracket) {
+                    return false;
+                }
             }
         }
 
