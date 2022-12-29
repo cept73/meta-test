@@ -21,15 +21,12 @@ class Formula
      */
     public function check(): bool
     {
-        $isValid                = true;
         $currentOpenedBrackets  = '';
 
         $openedBracketsList     = self::BRACKETS_LIST;
         $closedBracketsList     = array_flip(self::BRACKETS_LIST);
         $indexMax               = strlen($this->formula);
 
-        // {[...]}   v
-        // {[}]      x
         for ($index = 0; $index < $indexMax; $index ++) {
             $currentCharacter = $this->formula[$index];
 
@@ -39,21 +36,20 @@ class Formula
                     break;
 
                 case ($revertedOpenedBracket = $closedBracketsList[$currentCharacter] ?? null) !== null:
+                    if (empty($currentOpenedBrackets)) {
+                        return false;
+                    }
+
                     $lastOpenedBracket = substr($currentOpenedBrackets, -1);
                     $currentOpenedBrackets = substr($currentOpenedBrackets, 0, -1);
-
                     if ($lastOpenedBracket !== $revertedOpenedBracket) {
-                        $isValid = false;
+                        return false;
                     }
 
                     break;
             }
         }
 
-        if (!empty($currentOpenedBrackets)) {
-            $isValid = false;
-        }
-
-        return $isValid;
+        return empty($currentOpenedBrackets);
     }
 }
