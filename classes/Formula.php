@@ -35,14 +35,14 @@ class Formula
                     $currentOpenedBrackets .= $currentCharacter;
                     break;
 
-                case ($revertedOpenedBracket = $closedBracketsList[$currentCharacter] ?? null) !== null:
+                case ($revertedClosedBracket = $closedBracketsList[$currentCharacter] ?? null) !== null:
                     if (empty($currentOpenedBrackets)) {
                         return false;
                     }
 
                     $lastOpenedBracket = substr($currentOpenedBrackets, -1);
                     $currentOpenedBrackets = substr($currentOpenedBrackets, 0, -1);
-                    if ($lastOpenedBracket !== $revertedOpenedBracket) {
+                    if ($lastOpenedBracket !== $revertedClosedBracket) {
                         return false;
                     }
 
