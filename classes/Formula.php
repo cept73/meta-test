@@ -45,8 +45,6 @@ class Formula
                     if ($lastOpenedBracket !== $revertedClosedBracket) {
                         return false;
                     }
-
-                    break;
             }
         }
 
