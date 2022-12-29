@@ -13,6 +13,7 @@ class Application
         '[({)]'     => false,
         '[({})'     => false,
         ')('        => false,
+        '[(])'      => false
     ];
 
     public function __construct(array $arguments)

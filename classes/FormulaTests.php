@@ -10,7 +10,7 @@ namespace Meta\Classes;
  */
 class FormulaTests
 {
-    public function __construct(private array $testCases, private bool $debugFlag = true)
+    public function __construct(private array $testCases)
     {
     }
 
@@ -26,9 +26,6 @@ class FormulaTests
             }
 
             print " [x] $formulaString\r\n";
-            if ($this->debugFlag) {
-                print_r($formula->getLastErrors());
-            }
         }
     }
 }
