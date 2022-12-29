@@ -3,7 +3,7 @@
 namespace Meta\Classes;
 
 /**
- * Functional run tests for Formula class
+ * Unit tests for Formula class
  *
  * Usage: (new FormulaTests([%case => %isCorrect, ...])->run();
  * For example ['()' => true]
